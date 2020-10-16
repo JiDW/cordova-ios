@@ -35,6 +35,17 @@ var WkWebKit = {
         if (path.startsWith('file://')) {
             return window.CDV_ASSETS_URL + path.replace('file://', '/_app_file_');
         }
+    },
+    convertProxyUrl: function (path) {
+        if (!path || !window.CDV_ASSETS_URL) {
+            return path;
+        }
+        if (path.startsWith('http://')) {
+            return window.CDV_ASSETS_URL + '/_http_proxy_' + encodeURIComponent(path.replace('http://', ''));
+        }
+        if (path.startsWith('https://')) {
+            return window.CDV_ASSETS_URL + '/_https_proxy_' + encodeURIComponent(path.replace('https://', ''));
+        }
         return path;
     }
 };
